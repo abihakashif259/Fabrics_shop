@@ -1,0 +1,181 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farhan Fabrics | Luxury Collection</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="header">
+  <div class="logo">FARHAN <span>FABRICS</span></div>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#brands">Brands</a>
+    <a href="#products">Shop</a>
+    <a href="#announcements">Announcements</a>
+    <a href="#feedback">Feedback</a>
+  </nav>
+  <div class="header-actions">
+    <button class="owner-btn" onclick="openOwnerLogin()">OWNER</button>
+    <button class="cart-btn" onclick="toggleCart()">
+      🛍 Cart <span id="cart-count">0</span>
+    </button>
+  </div>
+</header>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <p class="gold-text">THE ART OF LUXURY</p>
+    <h1>Elegance Woven<br>Into Every Thread</h1>
+    <p>Discover premium fabrics and timeless collections.</p>
+    <a href="#products" class="gold-btn">EXPLORE COLLECTION</a>
+  </div>
+</section>
+
+<section class="intro">
+  <p class="gold-text">WELCOME TO FARHAN FABRICS</p>
+  <h2>Luxury Meets Tradition</h2>
+  <p>Explore beautiful collections from your favourite clothing brands.</p>
+</section>
+
+<section class="brands-section" id="brands">
+  <p class="gold-text">DISCOVER YOUR STYLE</p>
+  <h2>Our Brands</h2>
+  <h3>Women's Collection</h3>
+  <div class="brand-grid" id="women-brands"></div>
+  <h3>Men's Collection</h3>
+  <div class="brand-grid" id="men-brands"></div>
+  <h3>Special Collection</h3>
+  <div class="brand-grid" id="special-brands"></div>
+</section>
+
+<section class="announcements-section" id="announcements">
+  <p class="gold-text">WHAT'S NEW</p>
+  <h2>Announcements</h2>
+  <div id="announcement-list" class="announcement-list"></div>
+</section>
+
+<section class="products-section" id="products">
+  <p class="gold-text">HANDPICKED FOR YOU</p>
+  <h2>Explore Our Collection</h2>
+
+  <div class="shop-controls">
+    <input type="text" id="search" placeholder="Search products or brands...">
+    <select id="brand-filter">
+      <option value="all">All Brands</option>
+    </select>
+  </div>
+
+  <div class="product-grid" id="product-grid"></div>
+</section>
+
+<section class="feedback-section" id="feedback">
+  <p class="gold-text">YOUR WORDS MATTER</p>
+  <h2>Customer Feedback</h2>
+  <p class="section-description">Share your shopping experience with us.</p>
+
+  <form id="feedback-form" class="feedback-form">
+    <input id="customer-name" type="text" placeholder="Your name" required maxlength="40">
+    <select id="customer-rating" required>
+      <option value="5">★★★★★ - Excellent</option>
+      <option value="4">★★★★ - Very good</option>
+      <option value="3">★★★ - Good</option>
+      <option value="2">★★ - Fair</option>
+      <option value="1">★ - Needs improvement</option>
+    </select>
+    <textarea id="customer-comment" placeholder="Write your feedback..." required maxlength="500"></textarea>
+    <button class="gold-btn" type="submit">SUBMIT FEEDBACK</button>
+  </form>
+
+  <div id="feedback-list" class="feedback-list"></div>
+</section>
+
+<section class="contact" id="contact">
+  <p class="gold-text">WE ARE HERE TO HELP</p>
+  <h2>Experience the Elegance</h2>
+  <p>For orders and enquiries, contact us on WhatsApp.</p>
+  <button class="gold-btn" onclick="contactWhatsApp()">CONTACT US</button>
+</section>
+
+<footer>
+  <h2>FARHAN <span>FABRICS</span></h2>
+  <p>Farhan Fabrics & Kamalia Khaddar House</p>
+  <p>© 2026 All Rights Reserved</p>
+</footer>
+
+<!-- OWNER LOGIN -->
+<div class="modal" id="owner-login">
+  <div class="modal-box">
+    <button class="close-btn" onclick="closeModal('owner-login')">✕</button>
+    <p class="gold-text">PRIVATE ACCESS</p>
+    <h2>Owner Login</h2>
+    <input type="password" id="owner-pin" placeholder="Enter owner PIN">
+    <button class="gold-btn full-btn" onclick="loginOwner()">LOGIN</button>
+    <p id="login-message" class="message"></p>
+  </div>
+</div>
+
+<!-- OWNER DASHBOARD -->
+<div class="modal" id="owner-dashboard">
+  <div class="dashboard-box">
+    <div class="dashboard-heading">
+      <div>
+        <p class="gold-text">CONTROL CENTER</p>
+        <h2>Owner Dashboard</h2>
+      </div>
+      <button class="close-btn" onclick="logoutOwner()">✕</button>
+    </div>
+
+    <div class="dashboard-tabs">
+      <button onclick="showOwnerTab('upload-tab')">Upload Product</button>
+      <button onclick="showOwnerTab('announcement-tab')">Announcement</button>
+      <button onclick="showOwnerTab('manage-tab')">Manage Products</button>
+    </div>
+
+    <div id="upload-tab" class="owner-tab">
+      <h3>Add New Product</h3>
+      <form id="product-form">
+        <input id="product-name" placeholder="Product / Suit name" required maxlength="70">
+        <select id="product-brand" required></select>
+        <input id="product-price" type="number" min="1" placeholder="Price in PKR" required>
+        <label class="upload-label">Product photo (optional)
+          <input id="product-image" type="file" accept="image/*">
+        </label>
+        <button class="gold-btn full-btn" type="submit">PUBLISH PRODUCT</button>
+      </form>
+    </div>
+
+    <div id="announcement-tab" class="owner-tab hidden">
+      <h3>Publish Announcement</h3>
+      <form id="announcement-form">
+        <input id="announcement-title" placeholder="Announcement title" required maxlength="80">
+        <textarea id="announcement-text" placeholder="Write your announcement..." required maxlength="500"></textarea>
+        <button class="gold-btn full-btn" type="submit">PUBLISH ANNOUNCEMENT</button>
+      </form>
+    </div>
+
+    <div id="manage-tab" class="owner-tab hidden">
+      <h3>Manage Products</h3>
+      <div id="manage-products-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- CART -->
+<section class="cart-panel" id="cart-panel">
+  <div class="cart-heading">
+    <h2>Your Shopping Bag</h2>
+    <button onclick="toggleCart()">✕</button>
+  </div>
+  <div id="cart-items"></div>
+  <h3 class="total">Total: Rs. <span id="cart-total">0</span></h3>
+  <button class="gold-btn checkout" onclick="checkout()">ORDER ON WHATSAPP</button>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
